@@ -1,0 +1,55 @@
+# Show directory + conda env on the first line, symbol on the second
+add_newline = true
+
+format = """
+$hostname
+dir: $directory$conda$git_branch$git_status
+$character
+"""
+
+[directory]
+# Bold white directory name
+style = "bold white"
+
+# Conda environment: "🅒 d2l-zh" in a nice warm yellow
+[conda]
+symbol = "🅒 "
+style = "bold fg:#ffd75f"         # warm, high-contrast yellow
+format = " [$symbol$environment]($style)"
+ignore_base = false
+
+
+[git_branch]
+symbol = " "
+style = "bold fg:#87afff"
+format = " [$symbol$branch]($style)"
+
+[git_status]
+style = "bold fg:#ffaf5f"
+format = " [$all_status$ahead_behind]($style)"
+
+
+# Prompt symbol: bright magenta ❯ for success, red ❯ on error
+[character]
+success_symbol = "[❯](bold green)"    # Other choices: "$", "❯", "➜", "›"
+error_symbol   = "[❯](bold red)"
+format = "$symbol "
+
+# Optional: hide the Python "" icon if you don't want it
+[python]
+disabled = true
+
+
+[hostname]
+ssh_only = true
+format = "[$hostname]($style) "
+style = "dimmed"
+
+
+[kubernetes]
+disabled = false
+format = "[$context( $namespace)]($style) "
+contexts = [
+  { context_pattern = ".*", style = "bold blue" }
+]
+
